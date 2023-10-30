@@ -1,5 +1,6 @@
 public class Truck extends Car {
     private double loadCapacity;
+    
     public Truck(String typeOfMovement, double weight, double maxSpeed, int wheelsCount, double loadCapacity) {
         super(typeOfMovement, weight, maxSpeed, wheelsCount);
         this.loadCapacity = loadCapacity;

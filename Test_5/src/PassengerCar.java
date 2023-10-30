@@ -1,6 +1,7 @@
 public class PassengerCar extends Car{
     private String model;
     private String brand;
+
     public PassengerCar(String typeOfMovement, double weight, double maxSpeed, int wheelsCount, String model, String brand) {
         super(typeOfMovement, weight, maxSpeed, wheelsCount);
         this.brand = brand;
