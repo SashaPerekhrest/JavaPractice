@@ -3,7 +3,7 @@ public class Main {
         Transport[] transports = new Transport[]{
                 new PassengerCar("наземный", 2, 180, 4, "x5", "BMW"),
                 new Truck("наземный", 4, 90, 6, 3),
-                new Transport("Воздушный", 6,  400)
+                new Car("Воздушный", 6,  400, 3)
         };
         for (Transport transport : transports){
             System.out.println(transport.toString());

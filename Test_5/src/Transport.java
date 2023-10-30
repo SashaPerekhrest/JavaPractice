@@ -1,4 +1,4 @@
-public class Transport {
+public abstract class Transport {
     private String typeOfMovement;
     private double weight;
     private double maxSpeed;
