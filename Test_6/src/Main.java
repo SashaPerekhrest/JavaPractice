@@ -23,16 +23,18 @@ public class Main {
 
     public static void demoIntGenerator(){
         var generators = new intGenerator[]{
-          new RandomIntGenerator(),
-          new TimeDependetIntGenerator()
+                new RandomIntGenerator(),
+                new TimeDependetIntGenerator(),
+                new SerialIntGenerator()
         };
 
-        for(var generator : generators)
-        {
-            System.out.println(generator.getName());
-            System.out.println("Случайное положительное " + generator.nextPositive());
-            System.out.println("Случайное отрицательное " + generator.nextNegative());
-            System.out.println();
+        for (var i = 0; i <10;i++) { // несколько проходов показывают, как работает счетчик и одинаковые показатели от времени
+            for (var generator : generators) {
+                System.out.println(generator.getName());
+                System.out.println("Случайное положительное " + generator.nextPositive());
+                System.out.println("Случайное отрицательное " + generator.nextNegative());
+                System.out.println();
+            }
         }
     }
 }
