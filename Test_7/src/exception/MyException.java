@@ -3,7 +3,7 @@ package exception;
 public class MyException extends Exception{ // не до конца понял, как сделать свое исключение
     @Override
     public String getMessage() {
-        return "Не съедобное";
+        return "Так нельзя!";
     }
     public MyException() { super(); }
     public MyException(String message) { super(message); }
