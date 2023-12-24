@@ -4,8 +4,6 @@ package softbyhumans.test_spring.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RegisterController {
 
-    @Bean
-    private final PasswordEncoder passwordEncoder(){return new BCryptPasswordEncoder(); }
+    private final PasswordEncoder passwordEncoder;
     private final UserService userService;
 
     @GetMapping
@@ -42,7 +39,7 @@ public class RegisterController {
         log.info("register request {}", form);
         if (!result.hasErrors()) {
             var user = form.toEntity();
-            user.setPassword(passwordEncoder().encode(form.getPassword()));
+            user.setPassword(passwordEncoder.encode(form.getPassword()));
             userService.save(user);
             return "redirect:/login";
         } else {
