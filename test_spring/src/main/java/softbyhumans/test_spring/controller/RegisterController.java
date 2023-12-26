@@ -1,6 +1,5 @@
 package softbyhumans.test_spring.controller;
 
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import softbyhumans.test_spring.dto.RegisterFormDTO;
 import softbyhumans.test_spring.service.UserService;
-
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -31,8 +29,6 @@ public class RegisterController {
         log.info("get register form");
         return "register";
     }
-
-
 
     @PostMapping
     public String register(@Valid RegisterFormDTO form, BindingResult result, Model model) {
@@ -51,6 +47,4 @@ public class RegisterController {
 
         return "register";
     }
-
-
 }

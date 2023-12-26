@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование игры</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">MusicStats</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Главная</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form action="/artists/edit" method="post">
+                <!-- Используем скрытое поле (hidden), чтобы незаметно пробрасывать в форму id записи -->
+                <!-- Используем data-th-value для задания значения полю -->
+                <input id="id" name="id" hidden data-th-value="${gameDTO.id}">
+                <div class="row my-3">
+                    <label for="name" class="col-sm-2 col-form-label">Игра</label>
+                    <div class="col-8">
+                        <input data-th-value="${gameDTO.name}" type="text" class="form-control" name="name" id="name">
+                    </div>
+                    <div
+                            class="alert alert-warning"
+                            data-th-text="${#fields.errors('gameDTO.name')}"
+                            data-th-if="${#fields.hasErrors('gameDTO.name')}"
+                    ></div>
+                </div>
+                <div class="row my-3">
+                    <label for="name" class="col-sm-2 col-form-label">Игра</label>
+                    <div class="col-8">
+                        <input data-th-value="${gameDTO.genre}" type="text" class="form-control" name="genre" id="genre">
+                    </div>
+                    <div
+                            class="alert alert-warning"
+                            data-th-text="${#fields.errors('gameDTO.genre')}"
+                            data-th-if="${#fields.hasErrors('gameDTO.genre')}"
+                    ></div>
+                </div>
+                <div class="row my-3">
+                    <label for="name" class="col-sm-2 col-form-label">Игра</label>
+                    <div class="col-8">
+                        <input data-th-value="${gameDTO.imgUrl}" type="text" class="form-control" name="imgUrl" id="imgUrl">
+                    </div>
+                    <div
+                            class="alert alert-warning"
+                            data-th-text="${#fields.errors('gameDTO.imgUrl')}"
+                            data-th-if="${#fields.hasErrors('gameDTO.imgUrl')}"
+                    ></div>
+                </div>
+                <div class="row mb-3">
+                    <label for="steamLink" class="col-sm-2 col-form-label">Spotify Id</label>
+                    <div class="col-8">
+                        <input data-th-value="${gameDTO.steamLink}" type="text" class="form-control" name="steamLink"
+                               id="steamLink">
+                    </div>
+                    <div
+                            class="alert alert-warning"
+                            data-th-if="${#fields.hasErrors('gameDTO.steamLink')}"
+                            data-th-each="err : ${#fields.errors('gameDTO.steamLink')}"
+                            data-th-text="${err}"
+                    ></div>
+
+                </div>
+                <div class="row my-3">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
-@Entity
+@Entity(name = "game")
 public class Game {
     // первичный ключ
     @Id
@@ -16,4 +16,5 @@ public class Game {
     private String name;
     private String genre;
     private String steamLink;
+    private String imgUrl;
 }
