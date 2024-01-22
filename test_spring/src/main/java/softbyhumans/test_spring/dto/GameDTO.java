@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import softbyhumans.test_spring.entity.Game;
+import softbyhumans.test_spring.entity.GameDeveloper;
+import softbyhumans.test_spring.repository.GameDeveloperRepository;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -19,6 +21,8 @@ public class GameDTO {
     private String imgUrl;
     @NotBlank
     private String steamLink;
+    private Long developerId;
+    private GameDeveloper developer;
 
     public Game toEntity(){
         var game = new Game();
@@ -27,6 +31,7 @@ public class GameDTO {
         game.setGenre(genre);
         game.setImgUrl(imgUrl);
         game.setSteamLink(steamLink);
+        game.setGameDeveloper(developer);
         return game;
     }
 }

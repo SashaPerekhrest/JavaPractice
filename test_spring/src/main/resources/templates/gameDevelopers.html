@@ -10,7 +10,7 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Игры</a>
+        <a class="navbar-brand" href="#">Разработчики</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Главная</a>
@@ -29,26 +29,22 @@
                     <th scope="col">#</th>
                     <th scope="col">Лого</th>
                     <th scope="col">Имя</th>
-                    <th scope="col">Разработчик</th>
-                    <th scope="col">Жанр</th>
-                    <th scope="col">Ссылка на steam</th>
+                    <th scope="col">Сайт</th>
                     <th scope="col">Действия</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-th-each="game,index : ${list}">
+                <tr data-th-each="developer,index : ${list}">
                     <th scope="row" data-th-text="${index.count}"></th>
                     <td>
-                        <img class="img-fluid" style="max-width: 250px" data-th-src="${game.imgUrl}"/>
+                        <img class="img-fluid" style="max-width: 250px" data-th-src="${developer.logoUrl}"/>
                     </td>
-                    <td data-th-text="${game.name}"></td>
-                    <td data-th-text="${game.gameDeveloper?.name}"></td>
-                    <td data-th-text="${game.genre}"></td>
-                    <td data-th-text="${game.steamLink}"></td>
+                    <td data-th-text="${developer.name}"></td>
+                    <td data-th-text="${developer.website}"></td>
                     <td class="d-flex flex-row justify-content-around">
                         <!-- используем data-th-href задания параметризированной ссылки  -->
                         <!-- используем || как параметризированную строку  -->
-                        <a data-th-href="@{|edit/${game.id}|}" class="btn btn-warning">
+                        <a data-th-href="@{|edit/${developer.id}|}" class="btn btn-warning">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-pen" viewBox="0 0 16 16">
                                 <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"></path>
@@ -58,7 +54,7 @@
                         <form action="#" th:action="@{remove}" method="post">
                             <!-- Используем скрытое поле (hidden), чтобы незаметно пробрасывать в форму id записи -->
                             <!-- Используем data-th-value для задания значения полю -->
-                            <input id="id" name="id" hidden data-th-value="${game.id}">
+                            <input id="id" name="id" hidden data-th-value="${developer.id}">
                             <button type="submit" class="btn btn-danger">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-trash" viewBox="0 0 16 16">
@@ -75,25 +71,13 @@
                         <!-- Первую колонку не трогаем -->
                         <th scope="row"></th>
                         <td>
-                            <input class="w-75" type="text" id="imgUrl" name="imgUrl" data-th-value="${gameDTO}?${gameDTO.imgUrl}:''">
+                            <input class="w-75" type="text" id="logoUrl" name="logoUrl" data-th-value="${developerDTO?.logoUrl}">
                         </td>
                         <td>
-                            <input class="w-75" type="text" id="name" name="name" data-th-value="${gameDTO}?${gameDTO.name}:''">
+                            <input class="w-75" type="text" id="name" name="name" data-th-value="${developerDTO?.name}">
                         </td>
                         <td>
-                            <select class="w-75" id="developerId" name="developerId" data-th-value="${gameDTO}?${gameDTO.developerId}:''">
-                                <option
-                                        data-th-each="developer: ${developers}"
-                                        data-th-text="${developer.name}"
-                                        data-th-value="${developer.id}"
-                                ></option>
-                            </select>
-                        </td>
-                        <td>
-                            <input class="w-75" type="text" id="genre" name="genre" data-th-value="${gameDTO}?${gameDTO.genre}:''">
-                        </td>
-                        <td>
-                            <input class="w-75" type="text" id="steamLink" name="steamLink" data-th-value="${gameDTO}?${gameDTO.steamLink}:''">
+                            <input class="w-75" type="text" id="website" name="website" data-th-value="${developerDTO?.website}">
                         </td>
                         <td class="display-flex justify-content-center">
                             <button type="submit" class="btn btn-success">
@@ -109,7 +93,7 @@
                 <!-- Дополнительная строка с информацией об ошибках валидации -->
                 <!-- Используем data-th-if, позволяющий задавать условный рендеринг тега-->
                 <!-- Выражение: ${artistDTO} != null - позволяет уточнить, нужно ли показывать строку с ошибками -->
-                <tr data-th-if="${artistDTO} != null">
+                <tr data-th-if="${sadDTO} != null">
                     <td></td>
                     <td>
                         <!-- используем data-th-text для инлайнинга значений  -->
@@ -120,8 +104,8 @@
                         <!-- у данного поля установлена одна аннотация - следовательно может быть только одна ошибка -->
                         <div
                                 class="alert alert-warning"
-                                data-th-text="${#fields.errors('gameDTO.name')}"
-                                data-th-if="${#fields.hasErrors('gameDTO.name')}"
+                                data-th-text="${#fields.errors('developerDTO.name')}"
+                                data-th-if="${#fields.hasErrors('developerDTO.name')}"
                         ></div>
                     </td>
                     <td>
@@ -134,8 +118,8 @@
                         <!-- поэтому каждую из них будем выводить в отдельном теге -->
                         <div
                                 class="alert alert-warning"
-                                data-th-if="${#fields.hasErrors('gameDTO.steamLink')}"
-                                data-th-each="err : ${#fields.errors('gameDTO.steamLink')}"
+                                data-th-if="${#fields.hasErrors('developerDTO.website')}"
+                                data-th-each="err : ${#fields.errors('developerDTO.website')}"
                                 data-th-text="${err}"
                         ></div>
                     </td>
